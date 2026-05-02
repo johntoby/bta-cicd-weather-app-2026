@@ -77,6 +77,11 @@ jobs:
       - name: Wait for App to Start
         run: sleep 5
 
+      - name: Create ZAP work directory
+        run: |
+          mkdir -p /tmp/zap-wrk
+          chmod 777 /tmp/zap-wrk
+
       - name: DAST - ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.12.0
         with:
@@ -84,6 +89,8 @@ jobs:
           fail_action: true
           allow_issue_writing: false
           artifact_name: zap-scan-report
+          docker_name: 'ghcr.io/zaproxy/zaproxy:stable'
+          cmd_options: '-w /tmp/zap-wrk'
 
       - name: Security Gate - Verify All Tests Passed
         run: echo '::notice::All security gates passed - proceeding to build and push'
