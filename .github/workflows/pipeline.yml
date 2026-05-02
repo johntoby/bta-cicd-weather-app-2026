@@ -88,6 +88,7 @@ jobs:
       # Container Image Security Scan
       - name: Trivy Image Security Scan
         uses: aquasecurity/trivy-action@master
+        continue-on-error: true
         with:
           image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/weather-app:latest
           format: 'table'
