@@ -83,6 +83,7 @@ jobs:
           target: 'http://localhost:4000'
           fail_action: true
           allow_issue_writing: false
+          artifact_name: zap-scan-report
 
       - name: Security Gate - Verify All Tests Passed
         run: echo '::notice::All security gates passed - proceeding to build and push'
